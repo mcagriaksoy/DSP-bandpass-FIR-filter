@@ -11,7 +11,7 @@ The aim of this project is to teach the student the filter design and the usage 
 During the project, Matlab R2018b program and Windows 10 x64 1089 operating system were used as development environment.
 
 
-#FDA Tool Output
+# Filter Design Tool (FDT) Output
 
 16th Degree FIR BandPass Filter
 
