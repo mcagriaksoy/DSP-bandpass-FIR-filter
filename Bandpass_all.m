@@ -2,7 +2,7 @@
 %Contact: mcagriaksoy@ya.ru
 %%%%%%%%%%%%%%%Part 1%%%%%%%%%%%%%%%%%%%%
 
-% Sampling rate is 16kHz
+% Sampling rate is 40 kHz
 sample_rate = 40000;
 
 % Choose filter cutoff frequencies (5 kHz - 10kHz)
@@ -18,14 +18,17 @@ cutoff_norm2 = cutoff_hz2 / nyq_freq;
 
 
 %Input x(t)
-t = linspace(0,1);
+%Determine sampled signal x(n)
+t = linspace(0,1,40); %40kHz sampled
+
 input = 0;
 for k=1:16
     input = input + ((2^(-k))*cos(1000*k*pi*t) + ((-3)^(-k))*sin(1000*k*pi*t));
     
 end
 plot(input)
-figure
+fvtool(fir_coeff,'Analysis','freq') %Magnitude and phase response of input
+
 
 % FIR filter order (i.e. number of coefficients - 1)
 order = 4;
@@ -39,7 +42,7 @@ impz(fir_coeff,1,[],100) %impulse response of filter
 fvtool(fir_coeff,'Analysis','freq') %Magnitude and phase response of filter
 
 output = conv(input, fir_coeff);
-fvtool(output,'Analysis','freq') %Magnitude and phase plots of x(t)
+fvtool(output,'Analysis','freq') %Magnitude and phase plots of x(t), x(n)
 figure
 
 
@@ -79,5 +82,3 @@ fvtool(fir_coeff2,'Analysis','freq') %Magnitude and phase response of filter
 output2 = conv(input, fir_coeff2);
 fvtool(output2,'Analysis','freq') %Magnitude and phase plots of x(t)
 
-
-figure
